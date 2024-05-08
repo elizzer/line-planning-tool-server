@@ -19,11 +19,11 @@ app.use("/user",userRoutes)
 app.use("/line",lineRoutes)
 app.use("/jobs",jobsRoutes)
 
-app.listen(5000,()=>{
-    console.log("[+]Server ready on port 5000")
-    mongoose.connect("mongodb://127.0.0.1:27017/linePlanning").then(()=>{
-        console.log("mongo connection done")
+app.listen(5001,()=>{
+    console.log("[+]Server ready on port 5000",process.env.MONGODB_URI)
+    mongoose.connect(process.env.MONGODB_URI).then(()=>{
+        console.log('[+]DB connected')
     }).catch((e)=>{
-        console.log("[*]",e)
+        console.log('[+]Error in connecting to db',e)
     })
 })
