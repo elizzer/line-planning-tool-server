@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 function signToken(userId) {
-  const token =  jwt.sign({ data: userId, exp: Math.floor(Date.now() / 1000) + (60 * 60) }, process.env.JWT_SECRET_KEY);
-  return token;
+  const expTime=Math.floor(Date.now() / 1000) + (60 * 60)
+  const token =  jwt.sign({ data: userId, exp: expTime }, process.env.JWT_SECRET_KEY);
+  return {token,expTime};
 }
 
 async function verifyToken(token) {

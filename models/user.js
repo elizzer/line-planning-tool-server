@@ -10,7 +10,7 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    //role
+    email:String    
 })
 
 const userModel=mongoose.model("User",userSchema)

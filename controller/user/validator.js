@@ -31,4 +31,22 @@ function validatePassword(password) {
     return { valid: true };
 }
 
-module.exports={validateUsername,validatePassword}
+function validateEmail(email) {
+    // Check if email is not empty
+    if (!email) {
+        return { valid: false, message: "Email is required" };
+    }
+
+    // Regular expression pattern for validating email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if email matches the pattern
+    if (!emailPattern.test(email)) {
+        return { valid: false, message: "Invalid email format" };
+    }
+
+    return { valid: true };
+}
+
+
+module.exports={validateUsername,validatePassword,validateEmail}

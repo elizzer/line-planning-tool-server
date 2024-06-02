@@ -1,12 +1,23 @@
 const lineModel = require("../../models/lines");
+const factoryModel = require("../../models/factory")
 
 async function create(req, res) {
   try {
-    const { name, metadata } = req.body;
+    const { name, metadata, factoryid } = req.body;
+    console.log(factoryid)
+
+    const factory =await factoryModel.findOne({_id:factoryid,userID:req.userId})
+
+    if(!factory){
+       return res.status(401).json({
+            error:true,
+            message:"User not authorized"
+        })
+    }
 
     let _existingLines = await lineModel.findOne({
-      userId: req.userId,
       name: name,
+      factoryID:factoryid
     });
 
     console.log(`[+]Existing lines `, _existingLines);
@@ -23,6 +34,7 @@ async function create(req, res) {
 
     newLine.name = name;
     newLine.userId = req.userId;
+    newLine.factoryID=factoryid
 
     if (metadata) newLine.metadata = metadata;
 

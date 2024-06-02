@@ -12,6 +12,8 @@ async function login(req, res) {
     //find the user
     const user=await  userModel.findOne({username:username})
     console.log(user)
+    const id_user= await userModel.findById(user._id.toString())
+    console.log("[+]user id find ",id_user)
     if(!user){
         throw new Error("Incorrect creds")
     }
@@ -21,13 +23,14 @@ async function login(req, res) {
     }
     
     //sign jwt token
-    const token= await signToken(user._id)
+    const {token,expTime}= await signToken(user._id)
     return res.json({
         error:false,
-        message:"Login success",
+        message:"Login successsss",
         data:{
             username:user.username,
-            token:token
+            token:token,
+            expTime
         }
     })
 

@@ -2,20 +2,20 @@
 const mongoose = require("mongoose")
 
 const lineSchema = mongoose.Schema({
+
+    factoryID:{
+        type:mongoose.Types.ObjectId,
+        required:true,
+        ref:"Factory"
+    },
     name:{
         type:String,
-        require:true,
-    },
-    userId:{
-        type:mongoose.Types.ObjectId,
-        required:true
+        required:true,
     },
     metadata:String,
-    currentjob:{
-        type:mongoose.Types.ObjectId,
-        ref:"jobs"
-    }
 })
+
+lineSchema.index({ factoryID: 1 });
 
 const lineModel=mongoose.model("line",lineSchema)
 module.exports=lineModel

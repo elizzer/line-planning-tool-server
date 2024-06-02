@@ -1,5 +1,5 @@
 const {hashPassword}=require("../../utils/hash")
-const {vaidateUsername,validatePassword, validateUsername} = require("./validator")
+const {validateUsername,validatePassword, validateEmail} = require("./validator")
 
 const userModel=require("../../models/user")
 
@@ -8,11 +8,18 @@ async function signup(req,res){
 
     try{
 
-        const { username, password } = req.body;
+        const { username, password, email } = req.body;
+
         const userNameValidation=validateUsername(username)
         
         if(!userNameValidation.valid){
             throw new Error(userNameValidation.message)
+        }
+
+        const emailValidation=validateEmail(email)
+
+        if(!emailValidation.valid){
+            throw new Error(emailValidation.message)
         }
 
         const passwordValidation=validatePassword(password)

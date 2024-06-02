@@ -1,7 +1,6 @@
 const jobModel = require("../../models/jobs");
 const lineModel = require("../../models/lines");
 
-const {format,add} = require("date-fns")
 
 async function create(req, res) {
   try {
@@ -11,7 +10,7 @@ async function create(req, res) {
       piecesPerDay,
       startDate,
       color,
-      jobName,
+      name,
       metaData,
     } = req.body; 
 
@@ -22,7 +21,7 @@ async function create(req, res) {
       throw new Error("Line name not found");
     }
 
-    console.log(req.body)
+    console.log("create new job",req.body)
 
     // console.log(totalPieces)
     totalPieces=parseInt(totalPieces)
@@ -53,7 +52,7 @@ async function create(req, res) {
       throw new Error("The start day is sunday");
     }
 
-    if(!jobName){
+    if(!name){
         throw new Error("Job name not found")
     }
 
@@ -71,7 +70,7 @@ async function create(req, res) {
         startDate:_startDate,
         endDate:_endDate,
         piecesPerDay,
-        jobName,
+        name,
         metaData,
         color,
         noOfDays:_nod+_nos

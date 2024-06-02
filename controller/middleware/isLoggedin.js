@@ -1,5 +1,5 @@
 const { verifyToken } = require("../user/jwt");
-const userModel = require("../../models/lines")
+const userModel = require("../../models/user")
 
 async function isLoggedIn(req, res, next) {
   try {
@@ -12,6 +12,7 @@ async function isLoggedIn(req, res, next) {
     if(!token){
         throw new Error("user not logged in")
     }
+    // console.log(token)
     const tokenData = await verifyToken(token);
     console.log(tokenData)
 
@@ -19,17 +20,20 @@ async function isLoggedIn(req, res, next) {
         throw new Error("User not logged in")
     }
 
-    const _user=userModel.findById(tokenData.data)
+    const _user=await userModel.findById(tokenData.data)
+    // console.log("user",_user)
+
     if(!_user){
         throw new Error("Undefined User")
     }
+
 
     req.userId = tokenData.data;
     
     next()
 
   } catch (error) {
-    return res.json({
+    return res.status(401).json({
       error: true,
       message: error.message,
     });
