@@ -163,6 +163,8 @@ async function deleteFactoryByIdController(req, res) {
       throw new Error("factory attempt to delete no exitst");
     }
 
+    await lineModel.deleteMany({factoryID:_deletedfactory._id})
+
     return res.json({
       error: false,
       data: _deletedfactory,

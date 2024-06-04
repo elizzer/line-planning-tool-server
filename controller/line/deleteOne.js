@@ -2,7 +2,7 @@ const lineModel= require("../../models/lines")
 
 async function deleteOne(req,res){
     try{
-        const deletedLine=await lineModel.findOneAndDelete({_id:req.params.id,userId:req.userId})
+        const deletedLine=await lineModel.findOneAndDelete({_id:req.params.id})
         if(!deletedLine){
             throw new Error("Line not found")
         }

@@ -11,12 +11,12 @@ const readByFactoryId = require("../controller/line/readByFactoryId")
 
 const isLoggedIn = require("../controller/middleware/isLoggedin")
 
-router.post("/",isLoggedIn,createController)
-router.get("/",isLoggedIn,readAllController)
-router.get("/:id",isLoggedIn,readByIdController)
+router.post("/",createController)
+router.get("/",readAllController)
+router.get("/:id",readByIdController)
 // router.get("/factory/:id",isLoggedIn,readByFactoryId)
-router.patch("/:id",isLoggedIn,updateOneController)
-router.delete("/:id",isLoggedIn,deleteOneController)
+router.patch("/:id",updateOneController)
+router.delete("/:id",deleteOneController)
 
 
 

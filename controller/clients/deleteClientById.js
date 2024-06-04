@@ -11,7 +11,7 @@ async function deleteClientById(req,res){
             throw new Error("Client attempt to delete no exitst")
         }
 
-        const _deleteClientCategory= await categoryModel.deleteMany({clientID:_deletedClient._id})
+        // const _deleteClientCategory= await categoryModel.deleteMany({clientID:_deletedClient._id})
 
         return res.json({
             error:false,
