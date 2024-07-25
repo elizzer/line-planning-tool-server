@@ -53,7 +53,7 @@ async function create(req, res) {
       }
     }
 
-    if (piecesPerDay && startDate && endDate) {
+    if (piecesPerDay!==0 && startDate && endDate) {
       let _startDay = startDate.getDay();
       if (_startDay === 0) {
         console.log("start day is sunday");
@@ -79,7 +79,7 @@ async function create(req, res) {
           daysAdded++;
         }
       }
-    } else if (endDate && totalPieces && piecesPerDay) {
+    } else if (endDate && totalPieces!==0 && piecesPerDay!==0) {
       // Adjust end date if it is a Sunday
       if (endDate.getDay() === 0) {
         endDate.setDate(endDate.getDate() + 1);
